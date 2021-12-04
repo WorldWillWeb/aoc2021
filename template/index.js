@@ -45,14 +45,14 @@ function makeTests() {
     let test1 = sol1(dataText);
 
     if (test1 != resultTest1) {
-        console.error('Test 1 is wrong! Result = ' + test1 + ' --> Expected this -->' + resultTest1);
+        console.error('Test 1 is wrong! Result = ' + test1 + ' --> Expected this --> ' + resultTest1);
         return false;
     }
 
     let test2 = sol2(dataText);
 
     if (test2 != resultTest2) {
-        console.error('Test 2 is wrong! Result = ' + test2 + ' --> Expected this -->' + resultTest2);
+        console.error('Test 2 is wrong! Result = ' + test2 + ' --> Expected this --> ' + resultTest2);
         return false;
     }
 
