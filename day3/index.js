@@ -30,6 +30,7 @@ function sol1(input) {
 
     input.forEach(element => {
         for (let index = 0; index < element.length; index++) {
+            if (bits[index] == undefined) bits[index] = 0;
             if (element[index] != undefined) bits[index] += parseInt(element[index]);
         }
     });
@@ -38,8 +39,6 @@ function sol1(input) {
        ( Math.round(input.length / 2 )) < bits[index] ? binaryGammaRate += '1' :  binaryGammaRate += '0';
        ( Math.round(input.length / 2 )) > bits[index] ? binaryEpsilonRate += '1' :  binaryEpsilonRate += '0';
     }
-
-    console.log(binaryGammaRate, binaryEpsilonRate)
 
     gammaRate = parseInt(binaryGammaRate, 2);
     epsilonRate = parseInt(binaryEpsilonRate, 2);
@@ -51,9 +50,40 @@ function sol1(input) {
 // Solve second puzzle
 function sol2(input) {
     let result = 0;
+    let binnaryOxygenRate = '';
+    let binnaryCo2Rate = '';
+    let oxygenRate = 0;
+    let co2Rate = 0;
+    let binaryLength = input[0].length;
+    let inputs = [input, input];
+    let bits = [];
+    let rate = [];
 
-    // Code ..
+    inputs.forEach((elem, k) => {
+        for (let index = 0; index < binaryLength; index++) {
+            bits[index] = 0;
+    
+            elem.forEach(el => {
+                bits[index] += parseInt(el[index]);
+            });
+    
+            ( k === 0 && Math.round(elem.length / 2 )) <= bits[index] ? binnaryOxygenRate = 1 :  binnaryOxygenRate = 0;
+            ( k === 1 && Math.round(elem.length / 2 )) >= bits[index] ? binnaryCo2Rate += 1 :  binnaryCo2Rate += 0;
+    
+            // Oxygen
+            elem.forEach((el,key) => {
+                if (el[index] != binnaryOxygenRate) elem.splice(key, 1);;           
+            });
+        }
+        console.log(elem);
+        rate[k] = parseInt(elem, 2);
+    });
 
+    console.log(rate);
+    oxygenRate = parseInt(rate[0], 2);
+    co2Rate = parseInt(rate[1], 2);
+
+    result = oxygenRate * co2Rate;
     return result;
 }
 
@@ -65,7 +95,7 @@ function makeTests() {
     let dataText = getFile('test.txt')
 
     let resultTest1 = 198;
-    let resultTest2 = 0;
+    let resultTest2 = 230;
 
     let test1 = sol1(dataText, 5);
 
